@@ -45,7 +45,7 @@ function startMonitoringBeacons() {
     MONITORING = true;    
     logToDom("started monitoring");
 
- 
+
     var delegate = new cordova.plugins.locationManager.Delegate().implement({
 
         didDetermineStateForRegion: function (pluginResult) {
@@ -79,7 +79,7 @@ function startMonitoringBeacons() {
     //cordova.plugins.locationManager.setDelegate(delegate);
 
         // required in iOS 8+
-        cordova.plugins.locationManager.requestWhenInUseAuthorization(); 
+        //cordova.plugins.locationManager.requestWhenInUseAuthorization(); 
         // or cordova.plugins.locationManager.requestAlwaysAuthorization()
 
         cordova.plugins.locationManager.startMonitoringForRegion(beaconRegion)
