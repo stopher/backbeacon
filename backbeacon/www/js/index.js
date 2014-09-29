@@ -82,9 +82,10 @@ function startMonitoringBeacons() {
         //cordova.plugins.locationManager.requestWhenInUseAuthorization(); 
         // or cordova.plugins.locationManager.requestAlwaysAuthorization()
 
-        cordova.plugins.locationManager.startMonitoringForRegion(beaconRegion)
+ cordova.plugins.locationManager.startRangingBeaconsInRegion(beaconRegion)
             .fail(console.error)
             .done();
+
 
 }
 
