@@ -76,8 +76,8 @@ function startMonitoringBeacons() {
     //cordova.plugins.locationManager.setDelegate(delegate);
 
     // required in iOS 8+
-    cordova.plugins.locationManager.requestWhenInUseAuthorization(); 
-    // or cordova.plugins.locationManager.requestAlwaysAuthorization()
+    //cordova.plugins.locationManager.requestWhenInUseAuthorization(); 
+    cordova.plugins.locationManager.requestAlwaysAuthorization();
 
     cordova.plugins.locationManager.startRangingBeaconsInRegion(beaconRegion)
         .fail(console.error)
