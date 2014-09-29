@@ -69,9 +69,20 @@ function startMonitoringBeacons() {
     var beaconRegion = new cordova.plugins.locationManager.BeaconRegion(identifier, uuid, major, minor);
 
     cordova.plugins.locationManager.setDelegate(delegate);
-    cordova.plugins.locationManager.startMonitoringForRegion(beaconRegion)
+    //cordova.plugins.locationManager.startMonitoringForRegion(beaconRegion)
+    //    .fail(console.error)
+    //   .done();
+
+    //cordova.plugins.locationManager.setDelegate(delegate);
+
+    // required in iOS 8+
+    cordova.plugins.locationManager.requestWhenInUseAuthorization(); 
+    // or cordova.plugins.locationManager.requestAlwaysAuthorization()
+
+    cordova.plugins.locationManager.startRangingBeaconsInRegion(beaconRegion)
         .fail(console.error)
         .done();
+
 }
 
 function stopMonitoring() {
