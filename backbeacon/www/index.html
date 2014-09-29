@@ -32,15 +32,22 @@
     <body>
         <div class="app">
             <h1>Backbeacon</h1>
+            <input type="button" id="startbtn" value="start"/>
+            <input type="button" id="stopbtn" value="stop"/>
+
             <div id="deviceready" class="blink">
                 <p class="event listening">Connecting to Device</p>
                 <p class="event received">Device is Ready</p>
                 <ul id="beacons" class="beacons">
                     
                 </ul>
+
+
             </div>
         </div>
         <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/fastclick.js"></script>
+        <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();

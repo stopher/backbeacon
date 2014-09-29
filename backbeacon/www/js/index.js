@@ -1,8 +1,8 @@
-/*
+
 window.addEventListener('load', function () {
     new FastClick(document.body);
 }, false);
-*/
+
 
 function isBrowser() {
     var is = false;
@@ -35,9 +35,14 @@ var uuid = 'f7826da6-4fa2-4e98-8024-bc5b71e0893e';
 var identifier = 'Tayq';
 var minor = 50385;
 var major = 63311;
+var MONITORING = false;
 
 function startMonitoringBeacons() {
-    
+    if(MONITORING) {
+        return false;
+    }
+    MONITORING = true;    
+    logToDom("started monitoring");
     var delegate = new cordova.plugins.locationManager.Delegate().implement({
 
         didDetermineStateForRegion: function (pluginResult) {
@@ -70,6 +75,11 @@ function startMonitoringBeacons() {
 }
 
 function stopMonitoring() {
+    if(!MONITORING) {
+        return false;
+    }
+    MONITORING = false;  
+    logToDom("stopped monitoring");
 
     var beaconRegion = new cordova.plugins.locationManager.BeaconRegion(identifier, uuid, major, minor);
 
@@ -108,6 +118,7 @@ var app = {
         }
         else {
             console.log("we are not browser.")
+            logToDom("we are app!");
             this.bindEvents();
         }
     },
@@ -137,5 +148,9 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
+
+        $("#startbtn").on("click", startMonitoringBeacons);
+        $("#stopbtn").on("click", stopMonitoring);        
+
     }
 };
