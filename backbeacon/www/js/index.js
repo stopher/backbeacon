@@ -89,9 +89,11 @@ function findBeaconIndex(uuid, minor, major, distance) {
 
         logToDom('searching: uuid:'+beacons[x].uuid+",maj:"+beacons[x].major+",min:"+beacons[x].minor);
         logToDom('uuid:'+uuid+", uuid2:"+beacons[x].uuid);
-        var uuid1 = String(uuid).trim();
-        var uuid2 = String(beacons[x].uuid).trim();
+        var uuid1 = uuid.toString().toLowerCase().trim();
+        var uuid2 = beacons[x].uuid.toString().toLowerCase().trim();
+
         logToDom('uus==='+(uuid1 === uuid2));
+        logToDom('uus=='+(uuid1 == uuid2));
         logToDom('uu==='+(uuid === beacons[x].uuid));
         logToDom('ma==='+(major === beacons[x].major));
         logToDom('mi==='+(minor === beacons[x].minor));
