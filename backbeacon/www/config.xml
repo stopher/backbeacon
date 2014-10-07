@@ -40,8 +40,8 @@
     <gap:plugin name="org.apache.cordova.media" />
     <gap:plugin name="org.apache.cordova.network-information" />
     <gap:plugin name="org.apache.cordova.splashscreen" />
-    <gap:plugin name="org.apache.cordova.vibration" />
-    <gap:plugin name="com.caresolutions.ibeacon" version="2.1.0" />
+    <gap:plugin name="org.apache.cordova.vibration" />    
+    <gap:plugin name="com.unarin.cordova.beacon" version="3.0.0" />
 
     <icon src="icon.png" />
     <icon gap:platform="android" gap:qualifier="ldpi" src="res/icon/android/icon-36-ldpi.png" />
