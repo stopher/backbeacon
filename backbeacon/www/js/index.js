@@ -72,17 +72,18 @@ var beacons = [];
 
 function updateMyPos() {
     logToDom("updating pos");
-    var MULTIPLIER = 10;
+    
 
-    var currentpos1 = (parseInt(beacons[0].distance)*MULTIPLIER);
-    var currentpos2 = (parseInt(beacons[1].distance)*MULTIPLIER);
-    var currentpos3 = (parseInt(beacons[2].distance)*MULTIPLIER);
-    logToDom("curr0:"+currentpos1+"curr1:"+currentpos2+"curr2:"+currentpos3);
+    //var currentpos1 = (parseInt(beacons[0].distance)*MULTIPLIER);
+    //var currentpos2 = (parseInt(beacons[1].distance)*MULTIPLIER);
+    //var currentpos3 = (parseInt(beacons[2].distance)*MULTIPLIER);
+    logToDom("curr0:"+beacons[0].distance+"curr1:"+beacons[1].distance+"curr2:"+beacons[2].distance);
 
-    var pos = getTrilateration(currentpos1, currentpos2, currentpos3);
+    var pos = getTrilateration(beacons[0], beacons[1], beacons[2]);
+
     logToDom("posx:"+pos.x+",posy:"+pos.y);
-    $(".marker").css("left", parseInt(pos.x)+"px");
-    $(".marker").css("top", parseInt(pos.y)+"px");
+    $(".marker").css("left", parseInt(pos.x)*MULTIPLIER+"px");
+    $(".marker").css("top", parseInt(pos.y)*MULTIPLIER+"px");
 }
 
 function updateDistance(index, distance) {
