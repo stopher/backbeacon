@@ -12,12 +12,12 @@ var pos2= {"x":220, "y":0, "distance":0};
 var pos3 = {"x":220, "y":100, "distance":0};
 
 function getTrilateration(position1, position2, position3) {
-    var xa = position1.x;
-    var ya = position1.y;
-    var xb = position2.x;
-    var yb = position2.y;
-    var xc = position3.x;
-    var yc = position3.y;
+    var xa = position1.pos.x;
+    var ya = position1.pos.y;
+    var xb = position2.pos.x;
+    var yb = position2.pos.y;
+    var xc = position3.pos.x;
+    var yc = position3.pos.y;
     var ra = position1.distance;
     var rb = position2.distance;
     var rc = position3.distance;
@@ -82,7 +82,7 @@ function updateMyPos() {
     logToDom("1x:"+beacons[1].pos.x+"1y:"+beacons[1].pos.y);
     logToDom("2x:"+beacons[2].pos.x+"2y:"+beacons[2].pos.y);
 
-    var pos = getTrilateration(beacons[0].pos, beacons[1].pos, beacons[2].pos);
+    var pos = getTrilateration(beacons[0], beacons[1], beacons[2]);
 
     logToDom("posx:"+pos.x+",posy:"+pos.y);
 
