@@ -145,21 +145,24 @@ function startMonitoringBeacons() {
 
                 if(index >= 0) {
                     updateDistance(index, pluginResult.beacons[x].accuracy);
-                }                
+                }
             }
         }
     });
 
 
+    cordova.plugins.locationManager.setDelegate(delegate);
+
     for(var x = 0; x < beacons.length; x++) {        
-        var beaconRegion = new cordova.plugins.locationManager.BeaconRegion(beacons[x].identifier, beacons[x].uuid, beacons[x].major, beacons[x].minor);        
+        logToDom("Adding beac:"+x);
+        var beaconRegion = new cordova.plugins.locationManager.BeaconRegion(beacons[x].identifier, beacons[x].uuid, beacons[x].major, beacons[x].minor);
         
         cordova.plugins.locationManager.startRangingBeaconsInRegion(beaconRegion)
             .fail(console.error)
             .done();        
     }
 
-    cordova.plugins.locationManager.setDelegate(delegate);
+    
 
     
     //cordova.plugins.locationManager.startMonitoringForRegion(beaconRegion)
