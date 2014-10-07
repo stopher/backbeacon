@@ -124,7 +124,7 @@ function startMonitoringBeacons() {
 
         didDetermineStateForRegion: function (pluginResult) {
 
-            //logToDom('[DOM] didDetermineStateForRegion: ' + JSON.stringify(pluginResult));
+            logToDom('[DOM] didDetermineStateForRegion: ' + JSON.stringify(pluginResult));
 
             cordova.plugins.locationManager.appendToDeviceLog('[DOM] didDetermineStateForRegion: '
                 + JSON.stringify(pluginResult));
@@ -133,11 +133,11 @@ function startMonitoringBeacons() {
         didStartMonitoringForRegion: function (pluginResult) {
             console.log('didStartMonitoringForRegion:', pluginResult);
 
-            //logToDom('didStartMonitoringForRegion:' + JSON.stringify(pluginResult));
+            logToDom('didStartMonitoringForRegion:' + JSON.stringify(pluginResult));
         },
 
         didRangeBeaconsInRegion: function (pluginResult) {
-            //logToDom('[DOM] didRangeBeaconsInRegion: ' + JSON.stringify(pluginResult));
+            logToDom('[DOM] didRangeBeaconsInRegion: ' + JSON.stringify(pluginResult));
 
             for(var x = 0; x < pluginResult.beacons.length; x++) {
 
