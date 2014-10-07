@@ -78,16 +78,23 @@ function updateMyPos() {
     //var currentpos2 = (parseInt(beacons[1].distance)*MULTIPLIER);
     //var currentpos3 = (parseInt(beacons[2].distance)*MULTIPLIER);
     logToDom("curr0:"+beacons[0].distance+"curr1:"+beacons[1].distance+"curr2:"+beacons[2].distance);
+    logToDom("0x:"+beacons[0].x+"0y:"+beacons[0].y);
+    logToDom("1x:"+beacons[1].x+"1y:"+beacons[1].y);
+    logToDom("2x:"+beacons[2].x+"2y:"+beacons[2].y);
 
     var pos = getTrilateration(beacons[0], beacons[1], beacons[2]);
 
     logToDom("posx:"+pos.x+",posy:"+pos.y);
-    $(".marker").css("left", parseInt(pos.x)*MULTIPLIER+"px");
-    $(".marker").css("top", parseInt(pos.y)*MULTIPLIER+"px");
+
+    var xpos = parseInt(pos.x)*MULTIPLIER;
+    var ypos = parseInt(pos.y)*MULTIPLIER;
+
+    $(".marker").css("left", xpos+"px");
+    $(".marker").css("top", ypos+"px");
 }
 
 function updateDistance(index, distance) {
-    beacons[index].distance = distance;
+    beacons[index].distance = parseInt(distance);
     $(".beacon[data-id='"+beacons[index].identifier+"']").html(distance);
 }
 
