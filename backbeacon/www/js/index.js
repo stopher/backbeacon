@@ -138,19 +138,21 @@ function startMonitoringBeacons() {
 
         didRangeBeaconsInRegion: function (pluginResult) {
             logToDom('[DOM] dRBIR: ' + JSON.stringify(pluginResult));
-            logToDom('l'+pluginResult.beacons.length);
-            logToDom('x1'+pluginResult.beacons[0]["UUID"]);
-            logToDom('x2'+pluginResult.beacons[0]["uuid"]);
-            logToDom('x3'+pluginResult.beacons[0].uuid);
-            logToDom('x4'+pluginResult.beacons[0].UUID);
+            logToDom('l'+pluginResult.beacons.length);            
+            logToDom('uuid:'+pluginResult.beacons[0].uuid);
+            logToDom('min:'+pluginResult.beacons[0].minor);
+            logToDom('maj:'+pluginResult.beacons[0].major);
+            logToDom('acc:'+pluginResult.beacons[0].accuracy);
+            logToDom('rssi:'+pluginResult.beacons[0].rssi);
+
             //logToDom("Length:"+pluginResult.beacons.length+",UUID:"+pluginResult.beacons[0].UUID+",MINOR:"+pluginResult.beacons[0].MINOR+",MAJOR:"+pluginResult.beacons[0].MAJOR+",RSSI:"+pluginResult.beacons[x].ACCURACY+"ACC:"+pluginResult.beacons[x].RSSI);            
             //logToDom("Length2:"+pluginResult["beacons"].length);            
 
             for(var x = 0; x < pluginResult.beacons.length; x++) {
 
-                var index = findBeaconIndex(pluginResult.beacons[x].UUID, pluginResult.beacons[x].MINOR, pluginResult.beacons[x].major);
+                var index = findBeaconIndex(pluginResult.beacons[x].uuid, pluginResult.beacons[x].minor, pluginResult.beacons[x].major);
                 if(index >= 0) {
-                    updateDistance(index, pluginResult.beacons[x].ACCURACY);
+                    updateDistance(index, pluginResult.beacons[x].accuracy);
                 }
             }
         }
