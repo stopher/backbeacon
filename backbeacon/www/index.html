@@ -35,14 +35,20 @@
             <input type="button" id="startbtn" value="start"/>
             <input type="button" id="stopbtn" value="stop"/>
 
-            <div id="deviceready" class="blink">
+            <div id="deviceready" class="">
                 <p class="event listening">Connecting to Device</p>
                 <p class="event received">Device is Ready</p>
-                <ul id="beacons" class="beacons">
+
+                <div class="beacons">
+
+                </div>
+                <div class="map">
+                    <div class="marker"></div>
+                </div>
+
+                <ul id="messages" class="messages">
                     
                 </ul>
-
-
             </div>
         </div>
         <script type="text/javascript" src="cordova.js"></script>
@@ -54,3 +60,4 @@
         </script>
     </body>
 </html>
+
