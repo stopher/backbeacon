@@ -72,7 +72,7 @@ var beacons = [];
 
 function updateMyPos() {
     logToDom("updating pos");
-    var MULTIPLIER = 100;
+    var MULTIPLIER = 10;
 
     var currentpos1 = (parseInt(beacons[0].distance)*MULTIPLIER);
     var currentpos2 = (parseInt(beacons[1].distance)*MULTIPLIER);
