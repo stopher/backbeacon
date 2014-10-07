@@ -137,7 +137,8 @@ function startMonitoringBeacons() {
         },
 
         didRangeBeaconsInRegion: function (pluginResult) {
-            //logToDom('[DOM] didRangeBeaconsInRegion: ' + JSON.stringify(pluginResult.beacons[0].UUID));
+            logToDom('[DOM] dRBIR: ' + JSON.stringify(pluginResult));
+            logToDom(''+pluginResult.beacons.length);
             logToDom("Length:"+pluginResult.beacons.length+",UUID:"+pluginResult.beacons[0].UUID+",MINOR:"+pluginResult.beacons[0].MINOR+",MAJOR:"+pluginResult.beacons[0].MAJOR+",RSSI:"+pluginResult.beacons[x].ACCURACY+"ACC:"+pluginResult.beacons[x].RSSI);            
             logToDom("Length2:"+pluginResult["beacons"].length);            
 
