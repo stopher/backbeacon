@@ -7,9 +7,16 @@ window.addEventListener('load', function () {
 // 0.0 0.100
 // 100.0 100.100
 
-var pos1 = {"x":0, "y":0, "distance":0};
-var pos2= {"x":25, "y":0, "distance":0};
-var pos3 = {"x":25, "y":10, "distance":0};
+
+
+var pos1 = {"x":10, "y":10, "distance":0};
+var pos2= {"x":20, "y":10, "distance":0};
+var pos3 = {"x":20, "y":13, "distance":0};
+
+var t1 = {pos:pos1, distance: 6};
+var t2 = {pos:pos2, distance: 2};
+var t3 = {pos:pos3, distance: 2};
+
 
 function getTrilateration(position1, position2, position3) {
     var xa = position1.pos.x;
@@ -75,9 +82,7 @@ function updateMyPos() {
     
     var MULTIPLIER = 10;
 
-    //var currentpos1 = (parseInt(beacons[0].distance)*MULTIPLIER);
-    //var currentpos2 = (parseInt(beacons[1].distance)*MULTIPLIER);
-    //var currentpos3 = (parseInt(beacons[2].distance)*MULTIPLIER);
+
     logToDom("curr0:"+beacons[0].distance+"curr1:"+beacons[1].distance+"curr2:"+beacons[2].distance);
     logToDom("0x:"+beacons[0].pos.x+"0y:"+beacons[0].pos.y);
     logToDom("1x:"+beacons[1].pos.x+"1y:"+beacons[1].pos.y);
@@ -91,7 +96,7 @@ function updateMyPos() {
     var ypos = parseInt(pos.y)*MULTIPLIER;
 
     logToDom("left:"+xpos+",top:"+ypos);
-
+    
     $(".marker").css("left", xpos+"px");
     $(".marker").css("top", ypos+"px");
 }
@@ -195,7 +200,7 @@ function startMonitoringBeacons() {
         //cordova.plugins.locationManager.requestWhenInUseAuthorization(); 
         // or cordova.plugins.locationManager.requestAlwaysAuthorization()
 
-    setInterval(updateMyPos,2000);
+    setInterval(updateMyPos, 200);
 
 }
 
