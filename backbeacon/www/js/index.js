@@ -137,7 +137,7 @@ function startMonitoringBeacons() {
         },
 
         didRangeBeaconsInRegion: function (pluginResult) {
-            logToDom('[DOM] didRangeBeaconsInRegion: ' + JSON.stringify(pluginResult));
+            logToDom('[DOM] didRangeBeaconsInRegion: ' + JSON.stringify(pluginResult.beacons[0].UUID));
 
             for(var x = 0; x < pluginResult.beacons.length; x++) {
 
