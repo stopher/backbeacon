@@ -8,8 +8,8 @@ window.addEventListener('load', function () {
 // 100.0 100.100
 
 var pos1 = {"x":0, "y":0, "distance":0};
-var pos2= {"x":220, "y":0, "distance":0};
-var pos3 = {"x":220, "y":100, "distance":0};
+var pos2= {"x":25, "y":0, "distance":0};
+var pos3 = {"x":25, "y":10, "distance":0};
 
 function getTrilateration(position1, position2, position3) {
     var xa = position1.pos.x;
@@ -74,7 +74,7 @@ function updateMyPos() {
     logToDom("updating pos");
     
     var MULTIPLIER = 10;
-    
+
     //var currentpos1 = (parseInt(beacons[0].distance)*MULTIPLIER);
     //var currentpos2 = (parseInt(beacons[1].distance)*MULTIPLIER);
     //var currentpos3 = (parseInt(beacons[2].distance)*MULTIPLIER);
