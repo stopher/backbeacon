@@ -89,12 +89,14 @@ function updateMyPos() {
     var xpos = parseInt(pos.x)*MULTIPLIER;
     var ypos = parseInt(pos.y)*MULTIPLIER;
 
+    logToDom("left:"+xpos+",top:"+ypos);
+
     $(".marker").css("left", xpos+"px");
     $(".marker").css("top", ypos+"px");
 }
 
 function updateDistance(index, distance) {
-    beacons[index].distance = parseInt(distance);
+    beacons[index].distance = distance;
     $(".beacon[data-id='"+beacons[index].identifier+"']").html(distance);
 }
 
