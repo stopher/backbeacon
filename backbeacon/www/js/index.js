@@ -114,7 +114,15 @@ function updateDistance(index, distance) {
     $(".beacon[data-id='"+beacons[index].identifier+"']").html(distance);
 }
 
-function findBeaconIndex(uuid, minor, major, distance) {
+function updateMonitor(index, inside) {
+    if(inside) {
+        $(".beacon[data-id='"+beacons[index].identifier+"']").addClass("inside");
+    } else {
+        $(".beacon[data-id='"+beacons[index].identifier+"']").removeClass("inside");
+    }
+}
+
+function findBeaconIndex(uuid, minor, major) {
     
     for(var x = 0; x < beacons.length; x++) {
         
@@ -160,8 +168,18 @@ function startMonitoringBeacons() {
     var delegate = new cordova.plugins.locationManager.Delegate().implement({
 
         didDetermineStateForRegion: function (pluginResult) {
-
             logToDom('[DOM] didDetermineStateForRegion: ' + JSON.stringify(pluginResult));
+            
+
+            var idx = findBeaconIndex(pluginResult.region.uuid, pluginResult.region.minor, pluginResult.region.major);
+            if(idx >= 0) {
+                if("CLREGIONSTATEOUTSIDE" == pluginResult.state.toString()) {
+                    updateMonitor(idx, false);
+                } else if("CLREGIONSTATEINSIDE" == pluginResult.state.toString()) {
+                    updateMonitor(idx, true);
+                }
+            }
+
 
             cordova.plugins.locationManager.appendToDeviceLog('[DOM] didDetermineStateForRegion: '
                 + JSON.stringify(pluginResult));
@@ -169,7 +187,6 @@ function startMonitoringBeacons() {
 
         didStartMonitoringForRegion: function (pluginResult) {
             console.log('didStartMonitoringForRegion:', pluginResult);
-
             logToDom('didStartMonitoringForRegion:' + JSON.stringify(pluginResult));
         },
 
@@ -197,23 +214,13 @@ function startMonitoringBeacons() {
             .fail(console.error)
             .done();      
 
+        /*
         cordova.plugins.locationManager.startMonitoringForRegion(beaconRegion)
             .fail(console.error)
             .done();              
+        */
     }
 
-    
-
-    
-  //  cordova.plugins.locationManager.startMonitoringForRegion(beaconRegion)
-  //      .fail(console.error)
-  //     .done();
-
-    //cordova.plugins.locationManager.setDelegate(delegate);
-
-        // required in iOS 8+
-        //cordova.plugins.locationManager.requestWhenInUseAuthorization(); 
-        // or cordova.plugins.locationManager.requestAlwaysAuthorization()
 
     setInterval(updateMyLocation, 200);
 

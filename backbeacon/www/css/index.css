@@ -144,3 +144,7 @@ h1 {
     background: #3d3d3d;
     border: 2px #ffffff solid;
 }
+
+.inside {
+    border: 4px #ffffff solid;
+}
