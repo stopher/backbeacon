@@ -168,15 +168,15 @@ function startMonitoringBeacons() {
     var delegate = new cordova.plugins.locationManager.Delegate().implement({
 
         didDetermineStateForRegion: function (pluginResult) {
-            logToDom('[DOM] didDetermineStateForRegion: ' + JSON.stringify(pluginResult));
+            //logToDom('[DOM] didDetermineStateForRegion: ' + JSON.stringify(pluginResult));
             
 
             var idx = findBeaconIndex(pluginResult.region.uuid, pluginResult.region.minor, pluginResult.region.major);
 
             if(idx >= 0) {
-                if("CLREGIONSTATEOUTSIDE" == pluginResult.state) {
+                if("clregionstateoutside" == pluginResult.state.toLowerCase()) {
                     updateMonitor(idx, false);
-                } else if("CLREGIONSTATEINSIDE" == pluginResult.state) {
+                } else if("clregionstateinside" == pluginResult.state.toLowerCase()) {
                     updateMonitor(idx, true);
                 }
             }
@@ -214,11 +214,11 @@ function startMonitoringBeacons() {
             .fail(console.error)
             .done();      
 
-        /*
+
         cordova.plugins.locationManager.startMonitoringForRegion(beaconRegion)
             .fail(console.error)
             .done();              
-        */
+
     }
 
 
