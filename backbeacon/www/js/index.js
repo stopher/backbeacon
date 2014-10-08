@@ -189,7 +189,7 @@ function startMonitoringBeacons() {
     cordova.plugins.locationManager.setDelegate(delegate);
 
     // required ios8
-    cordova.plugins.locationManager.requestWhenInUseAuthorization(); 
+    //cordova.plugins.locationManager.requestWhenInUseAuthorization(); 
     // or cordova.plugins.locationManager.requestAlwaysAuthorization()
 
     for(var x = 0; x < beacons.length; x++) {        
