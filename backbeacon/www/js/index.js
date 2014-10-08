@@ -76,29 +76,30 @@ var MONITORING = false;
 
 
 var beacons = [];
+var closestBeacon;
 
 function updateMyPos() {
     logToDom("updating pos");
     
     var MULTIPLIER = 10;
-
-
-    logToDom("curr0:"+beacons[0].distance+"curr1:"+beacons[1].distance+"curr2:"+beacons[2].distance);
-    logToDom("0x:"+beacons[0].pos.x+"0y:"+beacons[0].pos.y);
-    logToDom("1x:"+beacons[1].pos.x+"1y:"+beacons[1].pos.y);
-    logToDom("2x:"+beacons[2].pos.x+"2y:"+beacons[2].pos.y);
-
     var pos = getTrilateration(beacons[0], beacons[1], beacons[2]);
-
-    logToDom("posx:"+pos.x+",posy:"+pos.y);
-
     var xpos = parseInt(pos.x)*MULTIPLIER;
-    var ypos = parseInt(pos.y)*MULTIPLIER;
-
-    logToDom("left:"+xpos+",top:"+ypos);
-    
+    var ypos = parseInt(pos.y)*MULTIPLIER;    
     $(".marker").css("left", xpos+"px");
     $(".marker").css("top", ypos+"px");
+}
+
+function updateMyLocation() {
+    var closestDistance = 0;
+    //closestBeacon = beacons[0];
+
+    for(var x = 0; x < beacons.length; x++) {
+        if(closestDistance < beacons[x].distance) {
+            closestDistance = beacons[x].distance;
+            closestBeacon = beacons[x];
+        }
+    }
+    $("#location").html(closestBeacon.name);
 }
 
 function updateDistance(index, distance) {
@@ -122,14 +123,15 @@ function findBeaconIndex(uuid, minor, major, distance) {
     return -1;
 }
 
-function addBeacon(uuid, identifier, minor, major, distance, color, pos) {
+function addBeacon(uuid, identifier, minor, major, distance, color, pos, name) {
     var beac = {
         uuid:uuid,
         identifier:identifier,
         minor:minor,
         major:major,
         distance: distance,
-        pos: pos
+        pos: pos,
+        name:name
     };    
     beacons.push(beac);
     var beacElt = $("<div/>");
@@ -218,6 +220,15 @@ function stopMonitoring() {
         .done();
     }
 
+}
+
+function onPause() {
+    setTimeout(stopMonitoring, 200);
+}
+
+function onResume() {
+    setTimeout(startMonitoringBeacons, 200);
+}
 
 /*    var beaconRegion = new cordova.plugins.locationManager.BeaconRegion(identifier, uuid, major, minor);
 
@@ -225,7 +236,7 @@ function stopMonitoring() {
         .fail(console.error)
         .done();
 */
-}
+
 
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -273,27 +284,32 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+        document.addEventListener("pause", onPause, false);
+        document.addEventListener("resume", onResume, false);
+
         console.log("deviceready!")
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         console.log("receivedEvent:"+id)
         var parentElement = document.getElementById(id);
+
+        /*
         var listeningElement = parentElement.querySelector('.listening');
         var receivedElement = parentElement.querySelector('.received');
 
         listeningElement.setAttribute('style', 'display:none;');
         receivedElement.setAttribute('style', 'display:block;');
+        */
 
         console.log('Received Event: ' + id);
 
-        $("#startbtn").on("click", startMonitoringBeacons);
-        $("#stopbtn").on("click", stopMonitoring);
+        setTimeout(startMonitoringBeacons, 100);
 
         
-        addBeacon('f7826da6-4fa2-4e98-8024-bc5b71e0893e', 'zKz7', 56808, 62981, 0, '#ffbbbb', pos1);
-        addBeacon('f7826da6-4fa2-4e98-8024-bc5b71e0893e', 'ck1G', 37022, 48290, 0, '#bbffbb', pos2);
-        addBeacon('f7826da6-4fa2-4e98-8024-bc5b71e0893e', 'Tayq', 50385, 63311, 0, '#bbbbff', pos3);
+        addBeacon('f7826da6-4fa2-4e98-8024-bc5b71e0893e', 'zKz7', 56808, 62981, 0, '#ffbbbb', pos1, 'Lille møterom');
+        addBeacon('f7826da6-4fa2-4e98-8024-bc5b71e0893e', 'ck1G', 37022, 48290, 0, '#bbffbb', pos2, 'Store møterom');
+        addBeacon('f7826da6-4fa2-4e98-8024-bc5b71e0893e', 'Tayq', 50385, 63311, 0, '#bbbbff', pos3, 'Kjøkkenet');
 
 
         updateDistance(0, 0);
