@@ -90,7 +90,7 @@ function updateMyPos() {
 }
 
 function updateMyLocation() {
-    var closestDistance = 0;
+    var closestDistance = 10;
     //closestBeacon = beacons[0];
 
     for(var x = 0; x < beacons.length; x++) {
@@ -104,9 +104,7 @@ function updateMyLocation() {
         $("#location").html(closestBeacon.name);
         logToDom("changing to:"+closestBeacon.name);
         $("body").css("background", closestBeacon.color);
-    }  else {
-        logToDom("same room as before");
-    }
+    }  
 
 
 }
@@ -176,7 +174,7 @@ function startMonitoringBeacons() {
         },
 
         didRangeBeaconsInRegion: function (pluginResult) {       
-
+            logToDom('[DOM] didRangeBeaconsInRegion: ' + JSON.stringify(pluginResult));
             for(var x = 0; x < pluginResult.beacons.length; x++) {
 
                 var index = findBeaconIndex(pluginResult.beacons[x].uuid, pluginResult.beacons[x].minor, pluginResult.beacons[x].major);
@@ -190,6 +188,10 @@ function startMonitoringBeacons() {
 
     cordova.plugins.locationManager.setDelegate(delegate);
 
+    // required ios8
+    cordova.plugins.locationManager.requestWhenInUseAuthorization(); 
+    // or cordova.plugins.locationManager.requestAlwaysAuthorization()
+
     for(var x = 0; x < beacons.length; x++) {        
         logToDom("Adding beac:"+x);
         var beaconRegion = new cordova.plugins.locationManager.BeaconRegion(beacons[x].identifier, beacons[x].uuid, beacons[x].major, beacons[x].minor);
@@ -202,9 +204,9 @@ function startMonitoringBeacons() {
     
 
     
-    //cordova.plugins.locationManager.startMonitoringForRegion(beaconRegion)
-    //    .fail(console.error)
-    //   .done();
+  //  cordova.plugins.locationManager.startMonitoringForRegion(beaconRegion)
+  //      .fail(console.error)
+  //     .done();
 
     //cordova.plugins.locationManager.setDelegate(delegate);
 
