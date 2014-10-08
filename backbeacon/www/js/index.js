@@ -94,7 +94,7 @@ function updateMyLocation() {
     //closestBeacon = beacons[0];
 
     for(var x = 0; x < beacons.length; x++) {
-        if(closestDistance < beacons[x].distance) {
+        if(closestDistance > beacons[x].distance && beacons[x].distance >= 0.1) {
             closestDistance = beacons[x].distance;
             closestBeacon = beacons[x];
         }
@@ -300,7 +300,7 @@ var app = {
 
         
         addBeacon('f7826da6-4fa2-4e98-8024-bc5b71e0893e', 'zKz7', 56808, 62981, 0, '#ffbbbb', pos1, 'Lille møterom');
-        addBeacon('f7826da6-4fa2-4e98-8024-bc5b71e0893e', 'ck1G', 37022, 48290, 0, '#bbffbb', pos2, 'Store møterom');
+        addBeacon('f7826da6-4fa2-4e98-8024-bc5b71e0893e', 'ck1G', 37022, 48290, 0, '#bbffbb', pos2, 'Nytt møterom');
         addBeacon('f7826da6-4fa2-4e98-8024-bc5b71e0893e', 'Tayq', 50385, 63311, 0, '#bbbbff', pos3, 'Kjøkkenet');
 
 
