@@ -174,7 +174,7 @@ function startMonitoringBeacons() {
         },
 
         didRangeBeaconsInRegion: function (pluginResult) {       
-            logToDom('[DOM] didRangeBeaconsInRegion: ' + JSON.stringify(pluginResult));
+            //logToDom('[DOM] didRangeBeaconsInRegion: ' + JSON.stringify(pluginResult));
             for(var x = 0; x < pluginResult.beacons.length; x++) {
 
                 var index = findBeaconIndex(pluginResult.beacons[x].uuid, pluginResult.beacons[x].minor, pluginResult.beacons[x].major);
@@ -188,9 +188,6 @@ function startMonitoringBeacons() {
 
     cordova.plugins.locationManager.setDelegate(delegate);
 
-    // required ios8
-    //cordova.plugins.locationManager.requestWhenInUseAuthorization(); 
-    // or cordova.plugins.locationManager.requestAlwaysAuthorization()
 
     for(var x = 0; x < beacons.length; x++) {        
         logToDom("Adding beac:"+x);
@@ -198,7 +195,11 @@ function startMonitoringBeacons() {
         
         cordova.plugins.locationManager.startRangingBeaconsInRegion(beaconRegion)
             .fail(console.error)
-            .done();        
+            .done();      
+
+        cordova.plugins.locationManager.startMonitoringForRegion(beaconRegion)
+            .fail(console.error)
+            .done();              
     }
 
     
