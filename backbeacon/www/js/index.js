@@ -172,14 +172,14 @@ function startMonitoringBeacons() {
             
 
             var idx = findBeaconIndex(pluginResult.region.uuid, pluginResult.region.minor, pluginResult.region.major);
+
             if(idx >= 0) {
-                if("CLREGIONSTATEOUTSIDE" == pluginResult.state.toString()) {
+                if("CLREGIONSTATEOUTSIDE" == pluginResult.state) {
                     updateMonitor(idx, false);
-                } else if("CLREGIONSTATEINSIDE" == pluginResult.state.toString()) {
+                } else if("CLREGIONSTATEINSIDE" == pluginResult.state) {
                     updateMonitor(idx, true);
                 }
             }
-
 
             cordova.plugins.locationManager.appendToDeviceLog('[DOM] didDetermineStateForRegion: '
                 + JSON.stringify(pluginResult));
@@ -309,9 +309,9 @@ var app = {
         setTimeout(startMonitoringBeacons, 500);
 
         
-        addBeacon('f7826da6-4fa2-4e98-8024-bc5b71e0893e', 'zKz7', 56808, 62981, 0, '#ffbbbb', pos1, 'Lille møterom');
-        addBeacon('f7826da6-4fa2-4e98-8024-bc5b71e0893e', 'ck1G', 37022, 48290, 0, '#bbffbb', pos2, 'Nytt møterom');
-        addBeacon('f7826da6-4fa2-4e98-8024-bc5b71e0893e', 'Tayq', 50385, 63311, 0, '#bbbbff', pos3, 'Kjøkkenet');
+        addBeacon('f7826da6-4fa2-4e98-8024-bc5b71e0893e', 'zKz7', 56808, 62981, 0, '#ffbbbb', pos1, 'i lille møterom');
+        addBeacon('f7826da6-4fa2-4e98-8024-bc5b71e0893e', 'ck1G', 37022, 48290, 0, '#bbffbb', pos2, 'i nytt møterom');
+        addBeacon('f7826da6-4fa2-4e98-8024-bc5b71e0893e', 'Tayq', 50385, 63311, 0, '#bbbbff', pos3, 'på kjøkkenet');
 
 
         updateDistance(0, 0);
